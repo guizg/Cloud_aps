@@ -2,6 +2,14 @@ from flask import Flask, request, jsonify, Response
 from Tarefas import *
 import json
 
+dic = {}
+counter = 0
+
+class Tarefa:
+	def _init_(self, id, nome):
+		self.id = id
+		self.nome = nome
+
 
 app = Flask(_name_)
 @app.route('/')

@@ -2,4 +2,4 @@
 
 sudo apt-get -y update
 sudo apt-get install -y python3-pip
-sudo pip3 install -y flask
+sudo pip3 install flask

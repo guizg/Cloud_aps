@@ -8,8 +8,8 @@ import pprint
 import time
 
 
-ec2 = boto3.client('ec2')
-ec2R = boto3.resource('ec2')
+ec2 = boto3.client('ec2', region_name='us-east-1')
+ec2R = boto3.resource('ec2', region_name='us-east-1')
 instances = {}
 current_id = None
 wait = False

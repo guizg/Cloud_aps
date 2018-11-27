@@ -2,6 +2,5 @@
 
 sudo apt-get -y update
 sudo apt-get install -y python3-pip
-sudo pip install flask
-sudo pip install boto3
-
+sudo pip3 install flask
+sudo pip3 install boto3

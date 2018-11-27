@@ -3,7 +3,9 @@ import sys
 import json
 from flask import jsonify
 
-URL = 'http://localhost:5000'
+
+
+IP = "localhost"
 
 def listar():
   r = requests.get(URL + '/Tarefa')
@@ -26,6 +28,8 @@ def atualizar(id, nome):
   headers = {'content-type': 'application/json'}
   r = requests.put(URL + '/Tarefa' + f'/{id}', data=payload, headers=headers)
 
+
+URL = 'http://'+IP+':5000'
 
 ACTION = sys.argv[1]
 
@@ -60,8 +64,8 @@ elif (ACTION == 'atualizar'):
 else:
   print("ERROR")
   
-# python tarefa.py listar - lista tarefas
-# python tarefa.py adicionar <tarefa> - adiciona tarefa
-# python tarefa.py buscar <id tarefa> - busca tarefa
-# python tarefa.py apagar <id tarefa> - apaga tarefa
-# python tarefa.py atualizar <id tarefa> <tarefa> - atualiza tarefa
+# python aps2.py listar                         - lista tarefas
+# python aps2.py adicionar <tarefa>             - adiciona tarefa
+# python aps2.py buscar <id tarefa>             - busca tarefa
+# python aps2.py apagar <id tarefa>             - apaga tarefa
+# python aps2.py atualizar <id tarefa> <tarefa> - atualiza tarefa

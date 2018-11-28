@@ -6,10 +6,14 @@ import requests
 from threading import Thread, Timer
 import pprint
 import time
+import sys
 
 
-ec2 = boto3.client('ec2', region_name='us-east-1')
-ec2R = boto3.resource('ec2', region_name='us-east-1')
+ACCESS_ID = sys.argv[1]
+ACCESS_KEY = sys.argv[2]
+
+ec2 = boto3.client('ec2', region_name='us-east-1', aws_access_key_id=ACCESS_ID, aws_secret_access_key= ACCESS_KEY)
+ec2R = boto3.resource('ec2', region_name='us-east-1', aws_access_key_id=ACCESS_ID, aws_secret_access_key= ACCESS_KEY)
 instances = {}
 current_id = None
 wait = False

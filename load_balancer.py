@@ -59,7 +59,7 @@ def list_instances():
 #         r = requests.get(URL)
 #         return jsonify(r.content)
 
-@app.route('/magicball/<pergunta>', methods = ['GET'])
+@app.route('/magicball', methods = ['GET'])
 def repass():
     global instances
     print(list(instances.keys()))
@@ -71,8 +71,8 @@ def repass():
         nome = json.loads(request.data)['pergunta']
         payload = json.dumps({"pergunta": nome})
         headers = {'content-type': 'application/json'}
-        r = requests.post(URL, data=payload, headers=headers)
-        return jsonify(r.content)
+        r = requests.get(URL, data=payload, headers=headers)
+        return r
         
 
 

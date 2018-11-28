@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, Response
 import json
+from random import randint
 
 app = Flask(__name__)
 @app.route('/')
@@ -12,7 +13,19 @@ def magic():
     
     if request.method == 'GET':
         pergunta = json.loads(request.data)['pergunta']
-        print(pergunta)
+        # print(pergunta)
+
+        primeira = pergunta.split()[0]
+
+        if primeira = "quantos" or primeira = "Quantos":
+            r = str(randint(0,100))
+            return jsonify({"answer": r})
+
+        donno = ["qual", "Qual", "quais", "Quais", "como", "Como", "por", "Por"]
+
+        if primeira in donno:
+            return jsonify({"answer": "I DONT KNOW, SORRY ;("})
+
         if len(pergunta)%2 == 0:
             return jsonify({"answer": "YES"})
         else:

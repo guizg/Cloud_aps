@@ -34,7 +34,7 @@ def list_instances():
         if( "Tags" not in list(e["Instances"][0].keys()) or e["Instances"][0]["Tags"] == None):
                 continue
         
-        if(e["Instances"][0]["Tags"][0]["Value"]=="graicer" and e["Instances"][0]["Tags"][1]["Value"]=="worker" and e["Instances"][0]['State']['Name'] == "running"):
+        if((e["Instances"][0]["Tags"][0]["Value"]=="graicer" or e["Instances"][0]["Tags"][0]["Value"]=="worker") and (e["Instances"][0]["Tags"][1]["Value"]=="graicer" or e["Instances"][0]["Tags"][1]["Value"]=="worker") and e["Instances"][0]['State']['Name'] == "running"):
             if (e["Instances"][0]["InstanceId"]) not in list(instances.keys()):
                 instances[(e["Instances"][0]["InstanceId"])] = e["Instances"][0]['PublicIpAddress']
 
@@ -70,7 +70,7 @@ def list_instances2():
 
         if( "Tags" not in list(e["Instances"][0].keys()) or e["Instances"][0]["Tags"] == None):
                 continue
-        if(e["Instances"][0]["Tags"][0]["Value"]=="graicer" and e["Instances"][0]["Tags"][1]["Value"]=="worker" and e["Instances"][0]['State']['Name'] == "running"):
+        if((e["Instances"][0]["Tags"][0]["Value"]=="graicer" or e["Instances"][0]["Tags"][0]["Value"]=="worker") and (e["Instances"][0]["Tags"][1]["Value"]=="graicer" or e["Instances"][0]["Tags"][1]["Value"]=="worker") and e["Instances"][0]['State']['Name'] == "running"):
             if (e["Instances"][0]["InstanceId"]) not in list(instances.keys()):
                 instances[(e["Instances"][0]["InstanceId"])] = e["Instances"][0]['PublicIpAddress']
 
@@ -82,7 +82,7 @@ def how_many_instances():
     for e in existing_instances["Reservations"]:
         if("Tags" not in list(e["Instances"][0].keys()) or e["Instances"][0]["Tags"] == None):
                 continue
-        if(e["Instances"][0]["Tags"][0]["Value"]=="graicer" and e["Instances"][0]["Tags"][1]["Value"]=="worker" and e["Instances"][0]['State']['Name'] == "running"):    
+        if((e["Instances"][0]["Tags"][0]["Value"]=="graicer" or e["Instances"][0]["Tags"][0]["Value"]=="worker") and (e["Instances"][0]["Tags"][1]["Value"]=="graicer" or e["Instances"][0]["Tags"][1]["Value"]=="worker") and e["Instances"][0]['State']['Name'] == "running"):    
             i += 1
     return i
 
@@ -130,9 +130,10 @@ def new_instance():
     )
     inst = instance[0]
     
-   
+    print("Waiting for "+inst.id+" to be running.")
     waiter = ec2.get_waiter('instance_running')
     waiter.wait(InstanceIds=[inst.id])
+    # print("PASSOU PELA MERDA DO WAIT")
     
     public_ip_address = None
 
@@ -140,12 +141,13 @@ def new_instance():
         existing_instances = ec2.describe_instances()
         # print(existing_instances["Reservations"])
         for e in existing_instances["Reservations"]:
+            # pp.pprint(e["Instances"][0])
             if("Tags" not in list(e["Instances"][0].keys()) or e["Instances"][0]["Tags"] == None):
                 continue
-            if(e["Instances"][0]["Tags"][0]["Value"]=="graicer" and e["Instances"][0]["Tags"][1]["Value"]=="worker" and e["Instances"][0]['InstanceId'] == inst.id):
+            if((e["Instances"][0]["Tags"][0]["Value"]=="graicer" or e["Instances"][0]["Tags"][0]["Value"]=="worker") and (e["Instances"][0]["Tags"][1]["Value"]=="graicer" or e["Instances"][0]["Tags"][1]["Value"]=="worker") and e["Instances"][0]['InstanceId'] == inst.id):
                 # pp.pprint(e)
                 public_ip_address = e["Instances"][0]['NetworkInterfaces'][0]['Association']['PublicIp']
-                # print(public_ip_address)
+        # print(public_ip_address)
 
     instances[inst.id] = public_ip_address
 

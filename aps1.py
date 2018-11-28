@@ -34,26 +34,26 @@ def tarefa():
 
 @app.route('/Tarefa/<id>', methods = ['PUT', 'GET', 'DELETE'])
 def tarefa_id(id):
-		global counter
-		global dic
-		if request.method == 'DELETE':
-			for key in dic:
-				if(int(key) == int(id)):
-						
-					del dic[int(key)]
-					print(dic)		
-					break
-			return Response(status=200)
-	
-		elif request.method == 'GET':
-			return jsonify(dic[int(id)])
+	global counter
+	global dic
+	if request.method == 'DELETE':
+		for key in dic:
+			if(int(key) == int(id)):
+					
+				del dic[int(key)]
+				print(dic)		
+				break
+		return Response(status=200)
 
-		elif request.method == 'PUT':
-			print(json.loads(request.data))
-			nome = json.loads(request.data)['nome']
-			dic[int(id)] = nome
-			print(dic)
-			return Response(status=200)
+	elif request.method == 'GET':
+		return jsonify(dic[int(id)])
+
+	elif request.method == 'PUT':
+		print(json.loads(request.data))
+		nome = json.loads(request.data)['nome']
+		dic[int(id)] = nome
+		print(dic)
+		return Response(status=200)
 
 
 @app.route('/healthcheck', methods = ['GET'])

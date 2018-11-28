@@ -4,7 +4,7 @@ import json
 from flask import jsonify
 
 
-IP = "35.173.221.97"
+IP = "localhost"
 URL = 'http://'+IP+':5000'
 
 

@@ -17,7 +17,7 @@ def magic():
 
         primeira = pergunta.split()[0]
 
-        if primeira = "quantos" or primeira = "Quantos":
+        if primeira == "quantos" or primeira == "Quantos":
             r = str(randint(0,100))
             return jsonify({"answer": r})
 

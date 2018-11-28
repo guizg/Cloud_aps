@@ -5,7 +5,7 @@ from flask import jsonify
 
 
 
-IP = "localhost"
+IP = "54.197.40.38"
 URL = 'http://'+IP+':5000'
 
 
@@ -17,6 +17,8 @@ pergunta = " ".join(palavras_pergunta)
 payload = json.dumps({"pergunta": pergunta})
 headers = {'content-type': 'application/json'}
 r = requests.get(URL + '/magicball', data=payload, headers=headers)
+print(r)
+print(r.content.decode('utf-8'))
 res = r.json()
 # print(r.content.decode('ascii'))
 # print(json.loads(res)["answer"])

@@ -73,7 +73,7 @@ def repass():
         headers = {'content-type': 'application/json'}
         r = requests.get(URL, data=payload, headers=headers)
         print(r)
-        return jsonify(r.content)
+        return jsonify(r.content.decode('utf-8'))
         
 
 

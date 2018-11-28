@@ -82,9 +82,8 @@ def how_many_instances():
     for e in existing_instances["Reservations"]:
         if("Tags" not in list(e["Instances"][0].keys()) or e["Instances"][0]["Tags"] == None):
                 continue
-        for tag in (e["Instances"][0]["Tags"]):
-            if(tag["Value"]=="graicer" and e["Instances"][0]['State']['Name'] == "running"):    
-                i += 1
+        if(e["Instances"][0]["Tags"][0]["Value"]=="graicer" and e["Instances"][0]["Tags"][1]["Value"]=="worker" and e["Instances"][0]['State']['Name'] == "running"):    
+            i += 1
     return i
 
 def new_instance():
@@ -215,8 +214,8 @@ def healthcheck_verification():
     global instances
     global current_id
     global ACTIVE_INSTANCES
-    list_instances2()
     while(True):
+        list_instances2()
         # time.sleep(2)
         for k in list(instances.keys()):
             tim = Timer(5.0, timeout)

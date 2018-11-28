@@ -24,12 +24,12 @@ def magic():
         donno = ["qual", "Qual", "quais", "Quais", "como", "Como", "por", "Por"]
 
         if primeira in donno:
-            return jsonify({"answer": "I DONT KNOW, SORRY ;("})
+            return jsonify({"answer": "NAO SEI, SORRY ;("})
 
         if len(pergunta)%2 == 0:
-            return jsonify({"answer": "YES"})
+            return jsonify({"answer": "SIM"})
         else:
-            return jsonify({"answer": "NO"})
+            return jsonify({"answer": "NAO"})
 
 
 @app.route('/healthcheck', methods = ['GET'])

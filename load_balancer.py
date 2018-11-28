@@ -62,16 +62,17 @@ def list_instances():
 @app.route('/magicball', methods = ['GET'])
 def repass():
     global instances
-    print(list(instances.keys()))
+    # print(list(instances.keys()))
     rd = choice(list(instances.keys()))
     IP = instances[rd]
-    URL = 'http://'+IP+':5000/Tarefa'
+    URL = 'http://'+IP+':5000/magicball'
 
     if request.method == 'GET':
         nome = json.loads(request.data)['pergunta']
         payload = json.dumps({"pergunta": nome})
         headers = {'content-type': 'application/json'}
         r = requests.get(URL, data=payload, headers=headers)
+        print(r)
         return jsonify(r.content)
         
 

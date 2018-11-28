@@ -72,7 +72,7 @@ def repass():
         payload = json.dumps({"pergunta": nome})
         headers = {'content-type': 'application/json'}
         r = requests.get(URL, data=payload, headers=headers)
-        return r
+        return jsonify(r.content)
         
 
 

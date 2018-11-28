@@ -7,14 +7,16 @@ def hello_world():
 	return 'Hello, World!'
 
 
-@app.route('/magicball/<pergunta>', methods = ['GET'])
-def magic(pergunta):
-		
-		if request.method == 'GET':
-            if len(pergunta)%2 == 0:
-                return jsonify({"answer": "sim"})
-            else:
-                return jsonify({"answer": "não"})
+@app.route('/magicball', methods = ['GET'])
+def magic():
+    
+    if request.method == 'GET':
+        pergunta = json.loads(request.data)['pergunta']
+        print(pergunta)
+        if len(pergunta)%2 == 0:
+            return jsonify({"answer": "YES"})
+        else:
+            return jsonify({"answer": "NO"})
 
 
 @app.route('/healthcheck', methods = ['GET'])

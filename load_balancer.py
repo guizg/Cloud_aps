@@ -40,7 +40,26 @@ def list_instances():
 
     return jsonify(instances)
 
-@app.route('/Tarefa', methods = ['POST', 'GET'])
+# @app.route('/Tarefa', methods = ['POST', 'GET'])
+# def repass():
+#     global instances
+#     print(list(instances.keys()))
+#     rd = choice(list(instances.keys()))
+#     IP = instances[rd]
+#     URL = 'http://'+IP+':5000/Tarefa'
+
+#     if request.method == 'POST':
+#         nome = json.loads(request.data)['nome']
+#         payload = json.dumps({"nome": nome})
+#         headers = {'content-type': 'application/json'}
+#         r = requests.post(URL, data=payload, headers=headers)
+#         return Response(status=200)
+        
+#     elif request.method == 'GET':
+#         r = requests.get(URL)
+#         return jsonify(r.content)
+
+@app.route('/magicball/<pergunta>', methods = ['GET'])
 def repass():
     global instances
     print(list(instances.keys()))
@@ -48,16 +67,13 @@ def repass():
     IP = instances[rd]
     URL = 'http://'+IP+':5000/Tarefa'
 
-    if request.method == 'POST':
-        nome = json.loads(request.data)['nome']
-        payload = json.dumps({"nome": nome})
+    if request.method == 'GET':
+        nome = json.loads(request.data)['pergunta']
+        payload = json.dumps({"pergunta": nome})
         headers = {'content-type': 'application/json'}
         r = requests.post(URL, data=payload, headers=headers)
-        return Response(status=200)
-        
-    elif request.method == 'GET':
-        r = requests.get(URL)
         return jsonify(r.content)
+        
 
 
 def list_instances2():
@@ -126,7 +142,7 @@ def new_instance():
                     cd Cloud_aps/
                     chmod 777 init.sh
                     ./init.sh
-                    python3 aps1.py""",
+                    python3 magicball.py""",
     )
     inst = instance[0]
     

@@ -5,7 +5,7 @@ from flask import jsonify
 
 
 
-IP = "34.227.79.226"
+IP = "localhost"
 URL = 'http://'+IP+':5000'
 
 def listar():

@@ -17,9 +17,9 @@ def hello_world():
 
 @app.route('/Tarefa', methods = ['POST', 'GET'])
 def tarefa():
+	global counter
+	global dic
 	if request.method == 'POST':
-		global counter
-		global dic
 		# print((request.data))
 		nome = json.loads(request.data)['nome']
 		print(nome)

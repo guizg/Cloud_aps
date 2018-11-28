@@ -5,7 +5,8 @@ from flask import jsonify
 
 
 
-IP = "localhost"
+IP = "35.172.180.218"
+URL = 'http://'+IP+':5000'
 
 def listar():
   r = requests.get(URL + '/Tarefa')
@@ -29,7 +30,6 @@ def atualizar(id, nome):
   r = requests.put(URL + '/Tarefa' + f'/{id}', data=payload, headers=headers)
 
 
-URL = 'http://'+IP+':5000'
 
 ACTION = sys.argv[1]
 
